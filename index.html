@@ -1,0 +1,89 @@
+<!-- Rocket Launch Countdown Game -->
+<!-- Main HTML structure for the browser-based clicker game -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding and viewport for responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title shown in browser tab -->
+    <title>Rocket Launch Countdown</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main game container - holds all game elements -->
+    <div class="game-container">
+        <!-- Game title - displayed at top -->
+        <h1 class="game-title">Click to launch the rocket</h1>
+        
+        <!-- Progress bars container - holds power and fuel bars -->
+        <div class="bars-container">
+            <!-- Launch Power bar - shows current power level (0-100%) -->
+            <div class="bar-wrapper">
+                <span class="bar-label">Launch Power</span>
+                <div class="bar-container">
+                    <div class="bar-fill power-bar" id="powerBar"></div>
+                </div>
+                <span class="bar-value" id="powerValue">0%</span>
+            </div>
+            <!-- Fuel bar - shows current fuel level (0-100%) -->
+            <div class="bar-wrapper">
+                <span class="bar-label">Fuel</span>
+                <div class="bar-container">
+                    <div class="bar-fill fuel-bar" id="fuelBar"></div>
+                </div>
+                <span class="bar-value" id="fuelValue">100%</span>
+            </div>
+        </div>
+
+        <!-- Rocket container - holds rocket image, cockpit overlay, and particle effects -->
+        <div class="rocket-container" id="rocketContainer">
+            <!-- Main rocket image -->
+            <img src="assets/rocket.png" alt="Rocket" class="rocket" id="rocket">
+            <!-- Cockpit overlay - fades in when power is >= 95% -->
+            <img src="assets/cockpit.png" alt="Cockpit" class="cockpit" id="cockpit">
+            <!-- Container for flame and fuel particle effects -->
+            <div class="particles" id="particles"></div>
+        </div>
+
+        <!-- Mode buttons - switch between Ignite and Refuel modes -->
+        <div class="buttons-container">
+            <!-- Ignite button - active by default, builds power -->
+            <button class="game-btn ignite-btn active" id="igniteBtn" data-mode="ignite">
+                Ignite Engines (Z)
+            </button>
+            <!-- Refuel button - adds fuel to the rocket -->
+            <button class="game-btn refuel-btn" id="refuelBtn" data-mode="refuel">
+                Refuel (X)
+            </button>
+        </div>
+
+        <!-- Instructions text - tells player how to win -->
+        <div class="instructions">
+            <p>Click the rocket to perform action.</p>
+        </div>
+    </div>
+
+    <!-- Modal overlay - hidden by default, shows win screen with video -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <!-- Launch video - plays when player wins -->
+            <video id="launchVideo" class="launch-video" playsinline>
+                <source src="assets/final_video.mp4" type="video/mp4">
+            </video>
+            <!-- Success message - appears after video plays -->
+            <div class="success-message" id="successMessage">
+                <h2>Launch successful.</h2>
+                <p>Mission begins now 🚀</p>
+                <!-- Restart button to play again -->
+                <button class="game-btn restart-btn" id="restartBtn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

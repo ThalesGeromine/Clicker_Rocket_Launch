@@ -1,0 +1,513 @@
+/* ==========================================
+   ROCKET LAUNCH COUNTDOWN GAME - STYLESHEET
+   ========================================== */
+
+/* --- CSS Reset --- */
+/* Removes default browser margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Body & Background --- */
+/* Sets up the deep space theme with gradient background */
+body {
+    /* Full viewport height */
+    min-height: 100vh;
+    /* Deep space gradient: dark navy to lighter blue */
+    background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 50%, #0d0d20 100%);
+    /* Font family for text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* White text color */
+    color: #fff;
+    /* Center content horizontally and vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Prevent scrollbars */
+    overflow: hidden;
+}
+
+/* --- Star Field Background --- */
+/* Creates twinkling stars using CSS gradients */
+.stars {
+    /* Fixed position covers entire viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Allows clicks to pass through */
+    pointer-events: none;
+    /* Multiple radial gradients create star dots at different positions */
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 160px 120px, #fff, transparent),
+        radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 250px 160px, #fff, transparent),
+        radial-gradient(2px 2px at 300px 100px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 350px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 400px 150px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 450px 50px, #fff, transparent),
+        radial-gradient(2px 2px at 500px 180px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 550px 90px, #fff, transparent),
+        radial-gradient(2px 2px at 600px 220px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 650px 140px, #fff, transparent),
+        radial-gradient(2px 2px at 700px 60px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 750px 190px, #fff, transparent),
+        radial-gradient(2px 2px at 800px 100px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 850px 170px, #fff, transparent),
+        radial-gradient(2px 2px at 900px 40px, rgba(255,255,255,0.6), transparent);
+    /* Repeat the pattern */
+    background-repeat: repeat;
+    /* Size of each star pattern */
+    background-size: 1000px 300px;
+    /* Twinkle animation */
+    animation: twinkle 8s ease-in-out infinite;
+}
+
+/* --- Star Twinkle Animation --- */
+/* Makes stars fade in and out */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* --- Main Game Container --- */
+/* Centers and organizes all game elements */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* --- Game Title --- */
+/* Title displayed at top of game */
+.game-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffbe0b;
+    text-shadow: 0 0 20px rgba(255, 190, 11, 0.6), 0 0 40px rgba(255, 190, 11, 0.3);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* --- Bars Container --- */
+/* Holds the power and fuel progress bars */
+.bars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* --- Individual Bar Wrapper --- */
+/* Aligns label, bar container, and value text */
+.bar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Bar Labels --- */
+.bar-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100px;
+    color: #8ab4f8;
+}
+
+/* --- Bar Container (background) --- */
+/* The empty bar that holds the fill */
+.bar-container {
+    flex: 1;
+    height: 24px;
+    /* Semi-transparent background */
+    background: rgba(255, 255, 255, 0.1);
+    /* Rounded corners */
+    border-radius: 12px;
+    /* Hides overflowing fill */
+    overflow: hidden;
+    /* Border and inner shadow for depth */
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Bar Fill (the colored part) --- */
+.bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    /* Smooth transition when width changes */
+    transition: width 0.3s ease;
+}
+
+/* --- Launch Power Bar Colors --- */
+/* Orange gradient for power */
+.power-bar {
+    background: linear-gradient(90deg, #ff6b35 0%, #ff9f1c 50%, #ffbe0b 100%);
+    /* Orange glow effect */
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Fuel Bar Colors --- */
+/* Cyan/blue gradient for fuel */
+.fuel-bar {
+    background: linear-gradient(90deg, #00d4ff 0%, #0099cc 50%, #006699 100%);
+    /* Cyan glow effect */
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Bar Value Text --- */
+.bar-value {
+    font-size: 14px;
+    font-weight: 700;
+    width: 45px;
+    text-align: right;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* --- Rocket Container --- */
+/* Holds rocket and cockpit images, handles click events */
+.rocket-container {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    cursor: pointer;
+    /* Scale up slightly on hover */
+    transition: transform 0.1s ease;
+}
+
+/* --- Rocket Hover Effect --- */
+.rocket-container:hover {
+    transform: scale(1.02);
+}
+
+/* --- Rocket Shake Animation Class --- */
+/* Applied when clicking in ignite mode */
+.rocket-container.shake {
+    animation: shake 0.15s ease-in-out;
+}
+
+/* --- Shake Keyframes --- */
+/* Rapid left-right movement */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-1deg); }
+    75% { transform: translateX(5px) rotate(1deg); }
+}
+
+/* --- Rocket Image --- */
+.rocket {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Orange glow drop-shadow */
+    filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.4));
+}
+
+/* --- Cockpit Overlay --- */
+/* Starts invisible (foggy), fades in when power >= 95% */
+.cockpit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;  /* Starts fully transparent */
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/* --- Particles Container --- */
+/* Holds flame and fuel particle effects */
+.particles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+}
+
+/* --- Individual Particle --- */
+.particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;  /* Circular shape */
+    pointer-events: none;
+    /* Fly animation moves particles outward */
+    animation: particleFly 0.8s ease-out forwards;
+}
+
+/* --- Particle Fly Animation --- */
+/* Moves particle in direction set by CSS custom properties --tx and --ty */
+@keyframes particleFly {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.3);
+    }
+}
+
+/* --- Flame Particle Style --- */
+.flame-particle {
+    background: radial-gradient(circle, #ff6b35 0%, #ff9f1c 40%, transparent 70%);
+    box-shadow: 0 0 15px #ff6b35;
+}
+
+/* --- Fuel Particle Style --- */
+.fuel-particle {
+    background: radial-gradient(circle, #00d4ff 0%, #0099cc 40%, transparent 70%);
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+/* --- Buttons Container --- */
+.buttons-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+/* --- Game Button Base Styles --- */
+.game-btn {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Ignite Button (Orange) --- */
+.ignite-btn {
+    background: linear-gradient(180deg, #ff6b35 0%, #d4522e 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* --- Ignite Button Hover --- */
+.ignite-btn:hover {
+    background: linear-gradient(180deg, #ff8c5a 0%, #ff6b35 100%);
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* --- Ignite Button Active (Selected) --- */
+.ignite-btn.active {
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* --- Refuel Button (Cyan) --- */
+.refuel-btn {
+    background: linear-gradient(180deg, #00d4ff 0%, #0099cc 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* --- Refuel Button Hover --- */
+.refuel-btn:hover {
+    background: linear-gradient(180deg, #33ddff 0%, #00d4ff 100%);
+    box-shadow: 0 6px 25px rgba(0, 212, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* --- Refuel Button Active (Selected) --- */
+.refuel-btn.active {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* --- Instructions Text --- */
+.instructions {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* --- Highlighted text in instructions --- */
+.instructions strong {
+    color: #ffbe0b;
+}
+
+/* --- Modal Overlay (Win Screen) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;  /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* --- Modal Active (Visible) --- */
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* --- Modal Content Container --- */
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+/* --- Launch Video --- */
+.launch-video {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(255, 107, 53, 0.5);
+    opacity: 0;
+    transition: opacity 1s ease 0.5s;
+}
+
+/* Video visible when modal is active */
+.modal-overlay.active .launch-video {
+    opacity: 1;
+}
+
+/* --- Success Message --- */
+/* Hidden initially, appears after video */
+.success-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;  /* Hidden */
+    transition: opacity 1s ease 2s;  /* Delays appearance by 2s */
+    pointer-events: none;
+}
+
+/* --- Success Message Visible --- */
+.success-message.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- Success Message Heading --- */
+.success-message h2 {
+    font-size: 48px;
+    color: #ffbe0b;
+    text-shadow: 0 0 30px rgba(255, 190, 11, 0.8);
+    margin-bottom: 10px;
+}
+
+/* --- Success Message Text --- */
+.success-message p {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+/* --- Restart Button --- */
+.restart-btn {
+    background: linear-gradient(180deg, #ff6b35 0%, #d4522e 100%);
+    color: #fff;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* --- Restart Button Hover --- */
+.restart-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(255, 107, 53, 0.7);
+}
+
+/* --- Custom Cursor for Ignite Mode --- */
+/* Uses ignite.png as cursor when in ignite mode */
+body.ignite-mode .rocket-container {
+    cursor: url('assets/ignite.png') 16 16, pointer;
+}
+
+/* --- Custom Cursor for Refuel Mode --- */
+/* Uses refuel.png as cursor when in refuel mode */
+body.refuel-mode .rocket-container {
+    cursor: url('assets/refuel.png') 16 16, pointer;
+}
+
+/* --- Body-level cursor for ignite mode --- */
+body.ignite-mode .game-container {
+    cursor: url('assets/ignite.png') 16 16, default;
+}
+
+/* --- Body-level cursor for refuel mode --- */
+body.refuel-mode .game-container {
+    cursor: url('assets/refuel.png') 16 16, default;
+}
+
+/* --- Mobile Responsive Styles --- */
+@media (max-width: 600px) {
+    /* Smaller rocket on mobile (scaled down from 400x600) */
+    .rocket-container {
+        width: 200px;
+        height: 300px;
+    }
+
+    /* Stack buttons vertically on mobile */
+    .buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Smaller buttons on mobile */
+    .game-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    /* Smaller labels on mobile */
+    .bar-label {
+        font-size: 12px;
+        width: 80px;
+    }
+
+    /* Smaller success heading on mobile */
+    .success-message h2 {
+        font-size: 32px;
+    }
+
+    /* Smaller success text on mobile */
+    .success-message p {
+        font-size: 18px;
+    }
+}
