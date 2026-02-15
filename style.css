@@ -184,8 +184,8 @@ body {
 /* Holds rocket and cockpit images, handles click events */
 .rocket-container {
     position: relative;
-    width: 400px;
-    height: 600px;
+    width: 200px;
+    height: 300px;
     cursor: pointer;
     /* Scale up slightly on hover */
     transition: transform 0.1s ease;
@@ -217,6 +217,9 @@ body {
     object-fit: contain;
     /* Orange glow drop-shadow */
     filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.4));
+    /* Original scale */
+    transform: scale(1);
+    transform-origin: center center;
 }
 
 /* --- Cockpit Overlay --- */
@@ -231,6 +234,9 @@ body {
     opacity: 0;  /* Starts fully transparent */
     pointer-events: none;
     transition: opacity 0.5s ease;
+    /* Larger than rocket for dramatic reveal */
+    transform: scale(1.8);
+    transform-origin: center center;
 }
 
 /* --- Particles Container --- */
@@ -391,7 +397,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 50px rgba(255, 107, 53, 0.5);
     opacity: 0;
-    transition: opacity 1s ease 0.5s;
+    transition: opacity 3s ease;
 }
 
 /* Video visible when modal is active */
@@ -477,10 +483,20 @@ body.refuel-mode .game-container {
 
 /* --- Mobile Responsive Styles --- */
 @media (max-width: 600px) {
-    /* Smaller rocket on mobile (scaled down from 400x600) */
+    /* Smaller rocket on mobile */
     .rocket-container {
-        width: 200px;
-        height: 300px;
+        width: 150px;
+        height: 225px;
+    }
+
+    /* Reduced scale for rocket on mobile */
+    .rocket {
+        transform: scale(1.2);
+    }
+
+    /* Reduced scale for cockpit on mobile */
+    .cockpit {
+        transform: scale(1.5);
     }
 
     /* Stack buttons vertically on mobile */

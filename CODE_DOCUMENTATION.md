@@ -49,8 +49,8 @@
 | 83-91 | Game title | "Click to launch the rocket" styling with yellow glow |
 | 93-100 | Bars container | Holds both progress bars |
 | 102-133 | Bar styling | Labels, containers, fills (orange=power, cyan=fuel), glow effects |
-| 135-186 | Rocket | Container (400x600px), shake animation, rocket image, drop-shadow |
-| 188-199 | Cockpit | Absolute overlay, starts at opacity 0, fade transition |
+| 135-186 | Rocket | Container (200x300px), shake animation, rocket image (scale 1), cockpit (scale 1.8), drop-shadow |
+| 188-199 | Cockpit | Absolute overlay, starts at opacity 0, fade transition, scale 1.8 for dramatic reveal |
 | 201-238 | Particles | Particle container, flame/fuel particle styles, fly animation |
 | 240-260 | Buttons | Ignite (orange) and Refuel (cyan) button styling, active states |
 | 262-270 | Instructions | Help text styling |
@@ -131,9 +131,11 @@ Caches all DOM elements for performance - avoids repeated `document.getElementBy
 ### Visual Updates:
 
 - **Game Title**: "Click to launch the rocket" displayed at top with yellow glow
-- **Rocket/Cockpit Size**: 400x600px (2x original size)
+- **Rocket Container**: 200x300px (original size)
+- **Rocket Scale**: 1 (original)
+- **Cockpit Scale**: 1.8 (larger than rocket for dramatic reveal)
 - **Modal Fade-In**: 1 second opacity transition when win screen appears
-- **Video Fade-In**: 1 second opacity transition with 0.5s delay
+- **Video Fade-In**: 3 second opacity transition
 
 ### Edge Cases Handled:
 
@@ -171,7 +173,7 @@ Caches all DOM elements for performance - avoids repeated `document.getElementBy
 - `setInterval(1000ms)` - Main game loop for decay and fade logic
 - CSS transitions/animations - For smooth visual effects
 - Modal fade: 1s transition
-- Video fade: 1s transition with 0.5s delay
+- Video fade: 3s transition
 
 ---
 
