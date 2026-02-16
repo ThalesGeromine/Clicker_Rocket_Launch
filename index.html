@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Main game area - holds all game elements -->
     <div class="game-container">
         <h1 class="game-title">Click to launch the rocket</h1>
         
+        <!-- Power & fuel indicators -->
         <div class="bars-container">
             <div class="bar-wrapper">
                 <span class="bar-label">Launch Power</span>
@@ -27,12 +29,14 @@
             </div>
         </div>
 
+        <!-- Click target: rocket image + cockpit overlay + particle effects -->
         <div class="rocket-container" id="rocketContainer">
             <img src="assets/rocket.png" alt="Rocket" class="rocket" id="rocket">
             <img src="assets/cockpit.png" alt="Cockpit" class="cockpit" id="cockpit">
             <div class="particles" id="particles"></div>
         </div>
 
+        <!-- Mode toggle: ignite builds power, refuel adds fuel -->
         <div class="buttons-container">
             <button class="game-btn ignite-btn active" id="igniteBtn" data-mode="ignite">
                 Ignite Engines (Z)
@@ -47,6 +51,7 @@
         </div>
     </div>
 
+    <!-- Win screen overlay - shows after successful launch -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <video id="launchVideo" class="launch-video" playsinline>
